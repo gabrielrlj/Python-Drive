@@ -11,6 +11,8 @@ from googleapiclient.http import MediaIoBaseDownload
 import io
 import numpy as np
 import pandas as pd
+import filter
+
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = [
@@ -51,12 +53,13 @@ def main():
             status, done = downloader.next_chunk()
             print ("Download %d%%." % int(status.progress() * 100))
 
-        with open("tarefas.xlsx", "wb") as f:
+        with open("Tarefas.xlsx", "wb") as f:
             f.write(fh.getbuffer())
 
     except HttpError as error:
         print(f'An error occurred: {error}')
 
+    filter.main()
 
 if __name__ == '__main__':
     main()
